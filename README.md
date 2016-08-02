@@ -1,3 +1,3 @@
 # Heartfixer
 
-Reconstruction of the source code of Hearfixer 95%
+Reconstruction of the source code of Heartfixer 95%
