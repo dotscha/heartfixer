@@ -1,0 +1,69 @@
+JAVAC = ecj
+JAVA = dalvikvm
+JAR = dx --dex --output
+EXO = ~/exo209/src/exomizer
+EMU = echo
+
+JAVA_CP = .:c64
+LIB = classes.dex
+JAVA_SRC = \
+	CTObject.java CodeRenderer.java FourPixels.java FourPixelsTok.java PixelPair16c.java \
+	Vector.java Matrix.java Patterns.java Point.java Tables.java Triangle.java VRLMObject.java \
+	threeaxrot.java c64/ReadCode.java c64/SpeedcodeUtils.java
+
+all :  main_exo.prg
+	ls -la *.prg
+
+runexo : main_exo.prg
+	$(EMU) main_exo.prg &
+
+bas_exo.prg : prec_bas.prg
+	exomizer -4 -s 16638 -o bas_exo.prg prec_bas.prg
+
+main_exo.prg : main.prg
+	$(EXO) sfx 10912 -t4 -o main_exo.prg main.prg
+
+main.prg : main.s 40x34irq.s 3axrot.s bitshader.s pattern.dat gprint.s pages.s stereog.s sphere.s
+	ca65 main.s
+	ld65 -t plus4 -o main.prg main.o
+
+msx_test.prg : msx_test.s
+	ca65 msx_test.s
+	ld65 -t plus4 -o msx_test.prg msx_test.o
+	$(EMU) msx_test.prg &
+
+sp_tok1.exo : sp_tok1.bin
+	$(EXO) raw -o sp_tok1.exo sp_tok1.bin
+
+sp_tok1.bin : sp_tok1_bin.o
+	ld65 -t plus4 -o sp_tok1.bin sp_tok1_bin.o
+
+sp_tok1_bin.o : sp_tok1_bin.s
+	ca65 sp_tok1_bin.s
+
+
+rungp : gprint_test.prg
+	$(EMU) gprint_test.prg &
+
+gprint_test.prg : gprint_test.o
+	ld65 -t plus4 -o gprint_test.prg gprint_test.o
+
+gprint_test.o : gprint_test.s gprint.s pages.s
+	ca65 gprint_test.s
+
+stereog.s : $(LIB)
+	$(JAVA) -cp $(LIB) Tables -stereog > stereog.s
+
+sphere.s : $(LIB)
+	$(JAVA) -cp $(LIB) Tables -sphere > sphere.s
+
+pattern.dat : $(LIB)
+	$(JAVA) -cp $(LIB) Patterns > pattern.dat
+
+$(LIB) : $(JAVA_SRC)
+	$(JAVAC) -cp $(JAVA_CP) $(JAVA_SRC)
+	$(JAR) $(LIB) $(JAVA_SRC:.java=.class)
+
+clean :
+	rm *.o main*.prg $(JAVA_SRC:.java=.class) $(LIB) || true
+

@@ -1,0 +1,92 @@
+shade_mod0: .byte %0000,%0100,%0100,%0101,%0101,%1001,%1001,%1010,%1010,%1110,%1110,%1111,%1111
+shade_mod1: .byte %0000,%0000,%0001,%0001,%0101,%0101,%0110,%0110,%1010,%1010,%1011,%1011,%1111
+
+
+shade_sample:
+
+shade_sample1:
+ .byte 12,12,12,12,12,12,11,11,10,10,9,9,8,8,7,7,6,6,5,5,4,4,3,3,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+
+shade_sample2:
+.byte 12
+;.byte 12
+.byte 12
+;.byte 12
+.byte 12
+;.byte 12
+.byte 12
+;.byte 12
+.byte 11
+;.byte 11
+.byte 11
+;.byte 10
+.byte 10
+;.byte 10
+.byte 9
+;.byte 9
+.byte 8
+;.byte 8
+.byte 7
+;.byte 7
+.byte 6
+;.byte 6
+.byte 5
+;.byte 5
+.byte 4
+;.byte 4
+.byte 3
+;.byte 2
+.byte 2
+.byte 1
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
+.byte 0
