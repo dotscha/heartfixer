@@ -52,9 +52,11 @@ call beginDemo,1
 call showPage,4
 
 page0:
-        .byte 3
+        .byte 4
         .byte 24,21-13
-        conv 'l','u','c','a'
+        conv 'l'
+        .byte 24+7,21-13
+        conv 'u','c','a'
         .byte 32,21
         conv 'o','f'
         .byte 12,21+13

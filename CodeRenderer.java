@@ -233,7 +233,7 @@ public class CodeRenderer
 
                 		if(!fp.empty())
                 		{
-                			String t = "(Bitmap+"+((l/4)*40*8+(l%4)*2+c*8)+")";
+                			String t = "($8000+"+((l/4)*40*8+(l%4)*2+c*8)+")";
                 			String write0 = ".byte >"+t;
                 			String write1 = ".byte <"+t;
                 			List wc = (List)code.get(fp);

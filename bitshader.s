@@ -585,7 +585,7 @@ p = $08
         ldx RotX+(3*I+0)*256,y
         ldy shift22,x
 
-        .byte $b3,p     ; lax (p),y  ;ldx RotY,y
+	lax (p),y		;.byte $b3,p
         lda colors2-rs,x
         ldx xs
         sta powers+I*32,x
@@ -603,7 +603,7 @@ beg:    stx xs
         ldx RotX+(3*I+0)*256,y
         ldy shift22,x
 
-        .byte $b3,p     ; lax (p),y  ;ldx RotY,y
+        lax (p),y		;.byte $b3,p
         lda colors2-rs,x
         ldx xs
         sta powers+I*32,x
@@ -649,6 +649,4 @@ shadebase = $0700
 .include "ver2x2.s"
 
 .include "detokenizer.s"
-
-
 

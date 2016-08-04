@@ -10,6 +10,7 @@ JAVA_SRC = \
 	CTObject.java CodeRenderer.java FourPixels.java FourPixelsTok.java PixelPair16c.java \
 	Vector.java Matrix.java Patterns.java Point.java Tables.java Triangle.java VRLMObject.java \
 	threeaxrot.java c64/ReadCode.java c64/SpeedcodeUtils.java
+JAVA_CLASSES = *.class */*.class
 
 all :  main_exo.prg
 	ls -la *.prg
@@ -23,8 +24,8 @@ bas_exo.prg : prec_bas.prg
 main_exo.prg : main.prg
 	$(EXO) sfx 10912 -t4 -o main_exo.prg main.prg
 
-main.prg : main.s 40x34irq.s 3axrot.s bitshader.s pattern.dat gprint.s pages.s stereog.s sphere.s
-	ca65 main.s
+main.prg : main.s 40x34irq.s 3axrot.s bitshader.s pattern.dat gprint.s pages.s stereog.s sphere.s screenplay.s
+	ca65 --cpu 6502X main.s
 	ld65 -t plus4 -o main.prg main.o
 
 msx_test.prg : msx_test.s
@@ -41,6 +42,8 @@ sp_tok1.bin : sp_tok1_bin.o
 sp_tok1_bin.o : sp_tok1_bin.s
 	ca65 sp_tok1_bin.s
 
+sp: $(LIB)
+	$(JAVA) -cp $(LIB) CodeRenderer -2x2tok model/MannequinHead.wrl > speedcode_tok1.s 2>speedcode_tok2.s
 
 rungp : gprint_test.prg
 	$(EMU) gprint_test.prg &
@@ -62,7 +65,7 @@ pattern.dat : $(LIB)
 
 $(LIB) : $(JAVA_SRC)
 	$(JAVAC) -cp $(JAVA_CP) $(JAVA_SRC)
-	$(JAR) $(LIB) $(JAVA_SRC:.java=.class)
+	$(JAR) $(LIB) $(JAVA_CLASSES)
 
 clean :
 	rm *.o main*.prg $(JAVA_SRC:.java=.class) $(LIB) || true

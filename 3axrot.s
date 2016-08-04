@@ -246,7 +246,7 @@ tr0 = *+1
         sta t+1
 tr1 = *+1
         ldy RotX,x
-        .byte $b3,t     ;   ldax (t),y
+	lax (t),y	;.byte $b3,t
         lda colors,x
         rts
 
@@ -290,7 +290,7 @@ ld0 = *+1
        sta t+1
 ld1 = *+1
        ldy RotX,x
-       .byte $b3,t     ;   ldax (t),y
+       lax (t),y	;.byte $b3,t
        lda colors,x
        rts
 
