@@ -1,3 +1,8 @@
+.macpack cpu
+.if !(.cpu .bitand CPU_ISET_6502X)
+	.error "We need 6502X for illegal opcodes!"
+.endif
+
 .org $2000-2
 .incbin "tables.prg"
 
@@ -11,6 +16,8 @@ tok_lo:	;11b9
 .include "speedcode_tok2.s"
 .byte 0
 
+.align 256
+.include "40x34irq.s"
 
 Bitmap = $2000
 
@@ -18,9 +25,6 @@ ColorPage0 = $0800
 ColorPage1 = $2000
 
 ; b800-bc00 : szabad!
-
-.include "40x34irq.s"
-
 
 .proc	player
 

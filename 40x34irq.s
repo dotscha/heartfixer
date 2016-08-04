@@ -30,13 +30,17 @@ irq0:
 val = *+1
         lda #$36
         sta $ff1d
-w:       lda $ff1d
+w:      lda $ff1d
         bne w
         lda #2
         sta $ff1d
         sta $ff0a
         lda #$c8
         sta $ff0b
+
+	lda #$ff	;cursor to $3ff
+	sta $ff0c
+	sta $ff0d
 
         lda #>ColorPage0
         sta $ff14
@@ -65,7 +69,13 @@ irq1:
         sta $ff0b
         lda #>ColorPage1
         sta $ff14
+
+	lda #0		;cursor to $000
+	sta $ff0c
+	sta $ff0d
+
         lda #<irq2
+
         jmp out
 
 irq2:
@@ -79,5 +89,12 @@ irq2:
         lda #<irq0
 
         jmp out
+
+.if ((>irq0 <> >irq1) || (>irq0 <> >irq2))
+	.error "irq entries should be in one page"
+	.error .string(<irq0)
+	.error .string(<irq1)
+	.error .string(<irq2)
+.endif
 
 .endproc

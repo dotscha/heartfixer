@@ -11,7 +11,7 @@ public class CodeRenderer
 		y1 = sizey/2-0.5;
 
 
-	static double qang = 0;
+	static double qang = 5;
 	static double cutang = Math.cos(Math.PI/180*qang);
 
 	public static void main(String[] args)
@@ -579,7 +579,7 @@ public class CodeRenderer
 					if(z<zdist[y][x])
 					{
 						zdist[y][x] = z;
-						out[y][x] = o.getNormal();
+						out[y][x] = o.getNormal().norm();
 					}
 				}
                         }
