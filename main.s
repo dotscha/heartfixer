@@ -520,8 +520,6 @@ calc_hi = calc_lo+52
 dist_tab = $2000
 ang_tab  = $2000+34*40
 
-.include "rot_dep2.s"
-
 .include "gprint.s"
 
 .include "3axrot.s"
@@ -537,6 +535,8 @@ speedcode:
 Rot = $bd00
 rs = Rot/256
 
+
+.include "rot_dep2.s"
 
 RotPacked:
 .include "rot2.dat"

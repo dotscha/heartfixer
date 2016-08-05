@@ -1,4 +1,4 @@
-JAVAC = ecj
+JAVAC = ecj -nowarn
 JAVA = dalvikvm
 JAR = dx --dex --output
 EXO = ~/exo209/src/exomizer
@@ -9,7 +9,7 @@ LIB = classes.dex
 JAVA_SRC = \
 	CTObject.java CodeRenderer.java FourPixels.java FourPixelsTok.java PixelPair16c.java \
 	Vector.java Matrix.java Patterns.java Point.java Tables.java Triangle.java VRLMObject.java \
-	threeaxrot.java c64/ReadCode.java c64/SpeedcodeUtils.java
+	threeaxrot.java c64/ReadCode.java c64/WriteCode.java c64/SpeedcodeUtils.java
 JAVA_CLASSES = *.class */*.class
 
 all :  main_exo.prg
@@ -44,6 +44,7 @@ sp_tok1_bin.o : sp_tok1_bin.s
 
 sp: $(LIB)
 	$(JAVA) -cp $(LIB) CodeRenderer -2x2tok model/MannequinHead.wrl > speedcode_tok1.s 2>speedcode_tok2.s
+	tail -n 1 speedcode_tok1.s
 
 rungp : gprint_test.prg
 	$(EMU) gprint_test.prg &

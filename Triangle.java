@@ -29,7 +29,10 @@ public class Triangle implements CTObject
 
 	public Vector getNormal()
 	{
-		return a.mul(b);
+		Vector n = a.mul(b);
+		if (n.getZ()>0)
+			n = n.mul(-1);
+		return n;
 	}
 
 	public double[] getMinMax(int coord)

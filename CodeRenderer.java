@@ -207,6 +207,21 @@ public class CodeRenderer
                 SpeedcodeUtils.makeCode(code);
 	}
 
+	private static class StaTok implements c64.WriteCode
+	{
+		String addr;
+
+		public StaTok(String a)
+		{
+			addr = a;
+		}
+
+		public void printCode()
+		{
+			System.out.println(".byte >("+addr+")");
+			System.err.println(".byte <("+addr+")");
+		}
+	}
 
 	public static void make2x2CodeTokOpt2(Collection objects)
 	{
@@ -233,49 +248,18 @@ public class CodeRenderer
 
                 		if(!fp.empty())
                 		{
-                			String t = "($8000+"+((l/4)*40*8+(l%4)*2+c*8)+")";
-                			String write0 = ".byte >"+t;
-                			String write1 = ".byte <"+t;
+                			String t = "$8000+"+((l/4)*40*8+(l%4)*2+c*8);
                 			List wc = (List)code.get(fp);
                 			if(wc==null)
                 				wc = new LinkedList();
-               				wc.add(write0);
-               				wc.add(write1);
+               				wc.add(new StaTok(t));
                 			code.put(fp,wc);
                 		}
                 	}
                 }
-                makeCode_4_token(code);
-	}
-
-
-	public static void makeCode_4_token(Map code)
-	{
-		ReadCode last = null, next = null;
-		while(!code.isEmpty())
-		{
-			Iterator rcIt = code.keySet().iterator();
-			int min = Integer.MAX_VALUE;
-			while(min>0 && rcIt.hasNext())
-			{
-				ReadCode rc = (ReadCode)rcIt.next();
-				int d = rc.cost(last);
-                                if(d<min)
-                                {
-                                	min = d;
-                                	next = rc;
-                                }
-			}
-                        next.printCode(last);
-                        Iterator it = ((List)code.get(next)).iterator();
-                        while(it.hasNext())
-                        {
-				System.out.println(it.next());
-				System.err.println(it.next());
-                        }
-                        code.remove(next);
-                        last = next;
-		}
+		//SpeedcodeUtils.makeCode(code);
+		//SpeedcodeUtils.makeCode(code,8000,100);
+		SpeedcodeUtils.makeCode(code,200,200,200);
 	}
 
 

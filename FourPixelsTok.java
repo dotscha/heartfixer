@@ -4,7 +4,7 @@ public class FourPixelsTok implements ReadCode
 {
 	private int[] norm = new int[] {-1,-1,-1,-1};
 
-	static int ORA_W = 4;
+	static int ORA_W = 3;
 	static int AND_B = 2;
 
 	public FourPixelsTok()
@@ -16,9 +16,10 @@ public class FourPixelsTok implements ReadCode
 		FourPixelsTok a = new FourPixelsTok();
 		FourPixelsTok b = new FourPixelsTok();
 		FourPixelsTok c = new FourPixelsTok();
+		a.setNormal(2,1);
 		a.setNormal(3,1);
-		b.setNormal(0,2);
-		c.setNormal(0,3);
+		b.setNormal(3,1);
+		c.setNormal(0,2);
 		a.printCode(null);
 		b.printCode(a);
 		c.printCode(b);
@@ -41,6 +42,7 @@ public class FourPixelsTok implements ReadCode
 
 		public Analysis(int[] l, int[] c)
 		{
+			int keep = 0;
 			ora = mask = 0;
 			write = new boolean[4];
 			for (int i=0; i<4; ++i)
@@ -52,7 +54,7 @@ public class FourPixelsTok implements ReadCode
 					ora++;
 					write[i] = true;
 				}
-				else if (l[i]!=-1 && c[i]==-1)
+				else if (c[i]==-1)
 				{
 					mask|=1;
 				}
@@ -62,8 +64,12 @@ public class FourPixelsTok implements ReadCode
 					write[i] = true;
 					mask|=1;
 				}
+				else
+				{
+					keep = 1;
+				}
 			}
-			mask = 15-mask;
+			mask = (15-mask)*keep;
 			if (write[0] && write[1] && c[0]==c[1])
 				ora--;
 			if (write[2] && write[3] && c[2]==c[3])
