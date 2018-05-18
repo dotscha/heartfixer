@@ -70,7 +70,7 @@ irq1:
         lda #>ColorPage1
         sta $ff14
 
-	lda #0		;cursor to $000
+	lda #$2        ;cursor to $202
 	sta $ff0c
 	sta $ff0d
 

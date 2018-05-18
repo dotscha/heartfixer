@@ -27,7 +27,7 @@ public class Triangle implements CTObject
                 	return Collections.EMPTY_LIST;
 	}
 
-	public Vector getNormal()
+	public Vector getNormal(double x, double y, double z)
 	{
 		Vector n = a.mul(b);
 		if (n.getZ()>0)

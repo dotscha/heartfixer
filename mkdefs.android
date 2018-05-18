@@ -1,0 +1,10 @@
+JAVAC = ecj -nowarn
+JAVA = dalvikvm
+JAR = dx --dex --output
+EXO = ~/exo209/src/exomizer
+MKD64 = ~/mkd64/bin/mkd64
+EMU = echo
+ASS = sh ass.sh
+RM = rm
+
+LIB = classes.dex

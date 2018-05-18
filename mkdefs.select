@@ -1,0 +1,26 @@
+
+OS = $(shell uname -s)
+ifeq ($(OS),Windows_NT)
+include mkdefs.win32
+else
+  OSS = $(shell uname -o)
+  CA = ~/cc65-2.13.3/src/ca65/ca65 --cpu 6502X
+  LD = ~/cc65-2.13.3/src/ld65/ld65
+  ifeq ($(OSS),Android)
+    include mkdefs.android
+  else
+    include mkdefs.linux
+  endif
+endif
+
+%.asm : %.s mkdefs.select
+	cat $< | sed 's/\.proc/    proc/' \
+		| sed 's/\.endproc/    endproc/' \
+		| sed 's/\.if/    if/' \
+		| sed 's/\.else/    else/' \
+		| sed 's/\.ifdef/    if/' \
+		| sed 's/\.ifndef/    if/' \
+		| sed 's/\.endif/    endif/' \
+		| sed 's/\.byte/byt/' > $@
+
+

@@ -257,9 +257,9 @@ public class CodeRenderer
                 		}
                 	}
                 }
-		//SpeedcodeUtils.makeCode(code);
+		SpeedcodeUtils.makeCode(code);
 		//SpeedcodeUtils.makeCode(code,8000,100);
-		SpeedcodeUtils.makeCode(code,200,200,200);
+		//SpeedcodeUtils.makeCode(code,20,20,20);
 	}
 
 
@@ -545,7 +545,7 @@ public class CodeRenderer
 		double dy = (y1-y0)/sizey;
 		while(it.hasNext())
 		{
-			Triangle o = (Triangle)it.next();
+			CTObject o = (CTObject)it.next();
 			double[] mm;
 			mm = o.getMinMax(0);
 			int ox0 = Math.max(xbeg(mm[0]),0);
@@ -563,10 +563,10 @@ public class CodeRenderer
 					if(z<zdist[y][x])
 					{
 						zdist[y][x] = z;
-						out[y][x] = o.getNormal().norm();
+						out[y][x] = o.getNormal(x0+dx*(x+0.5),y0+dy*(y+0.5),z).norm();
 					}
 				}
-                        }
+            }
 		}
 		return out;
 	}

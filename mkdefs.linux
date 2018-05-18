@@ -1,0 +1,14 @@
+JAVAC = ecj -1.5 -nowarn
+JAVA = java
+JAR = jar cf
+EXO = ~/exo209/src/exomizer
+MKD64 = ~/mkd64/bin/mkd64
+EMU = ~/plus4emu/plus4emu
+ASS = sh ass.sh
+RM = rm
+
+LIB = classes.jar
+
+#CA=~/cc65-2.13.3/src/ca65/ca65
+#LD=~/cc65-2.13.3/src/ld65/ld65
+

@@ -57,17 +57,17 @@ public class Tables
 			double y = (j+.5)/lat;
 			for(int i = 0; i<to_lon; ++i)
 			{
-				double x = (i+.5)/lon;
+				double x = (i+.5)/lon + 0.25;
 				double[] s = threeaxrot.square2ball(new double[]{x,y});
 				//xyz -> zxy
 				double[] sr= new double[]{s[2],s[0],s[1]};
 				double[] xy = threeaxrot.ball2square(sr);
-				la+= i==0 ? ".byte " : ",";
-				lo+= ",";
+				lo+= i==0 ? ".byte " : ",";
+				la+= ",";
 				la+= ""+(int)(xy[0]*lon);
 				lo+= ""+(int)(xy[1]*lat);
 			}
-			System.out.println(la+lo);
+			System.out.println(lo+la);
 		}
 	}
 }

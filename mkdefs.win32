@@ -1,0 +1,12 @@
+
+JDK_HOME = D:/Program Files/Java/jdk1.8.0_121/bin
+JAVAC = "$(JDK_HOME)/javac.exe"
+JAVA = "$(JDK_HOME)/java.exe"
+JAR = "$(JDK_HOME)/jar.exe" cf
+EXO = "D:/CrossDev/exomizer209/win32/exomizer.exe"
+MKD64 = "D:/CrossDev/mkd64_1_3b_win32/mkd64.exe"
+EMU = "D:/CrossDev/plus4emu/plus4emu.exe"
+ASS = ass.bat
+RM = del
+
+LIB = classes.jar
